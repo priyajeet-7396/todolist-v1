@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");
+
 
 const app = express();
 // Enable body parsing middleware
@@ -12,19 +14,7 @@ let items = [];
 let workitem = [];
 
 app.get("/", function (req, res) {
-  let today = new Date();
-  let options = {
-    weekday: "long",
-    day: "numeric",
-    months: "long"
-  };
-  
-  let day = today.toLocaleDateString("en-US",options);
-
-
-
-
-
+ let day = date();
   res.render("list", { listTittle: day, newListItems: items });
 });
 
@@ -40,6 +30,13 @@ app.post("/", function (req, res){
      }
     
   });
+
+  app.post("/deleteItem", (req, res) => {
+    let item = req.body.button;
+    items.splice(items.indexOf(item), 1);
+ 
+    res.redirect("/");
+})
 
   app.get("/work", function (req, res) {
     res.render("list",{listTittle:"Work List", newListItems: workitem})
