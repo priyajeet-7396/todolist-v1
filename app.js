@@ -31,12 +31,14 @@ app.post("/", function (req, res){
     
   });
 
-  app.post("/deleteItem", (req, res) => {
-    let item = req.body.button;
-    items.splice(items.indexOf(item), 1);
+
+  // code to delete item not working
+//   app.post("/deleteItem", (req, res) => {
+//     let item = req.body.button;
+//     items.splice(items.indexOf(item), 1);
  
-    res.redirect("/");
-})
+//     res.redirect("/");
+// })
 
   app.get("/work", function (req, res) {
     res.render("list",{listTittle:"Work List", newListItems: workitem})
